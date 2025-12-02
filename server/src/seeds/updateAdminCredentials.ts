@@ -9,7 +9,7 @@ const updateAdminCredentials = async () => {
     console.log('Updating admin credentials...');
 
     const newEmail = 'IshwarAdmin@123456';
-    const newPassword = 'Ishwar&@2002';
+    const newPassword = 'Ishwar@2002';
 
     const passwordHash = await hashPassword(newPassword);
 
