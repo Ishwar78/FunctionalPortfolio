@@ -1,28 +1,39 @@
 export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || (
-    typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
       ? "http://localhost:5000"
       : "" // Use relative paths in production
   );
 
 async function fetchJSON<T>(path: string, init?: RequestInit): Promise<T> {
   const token = localStorage.getItem('auth_token');
+  const fullUrl = `${API_BASE_URL}${path}`;
 
-  const res = await fetch(`${API_BASE_URL}${path}`, {
-    ...init,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(init?.headers || {}),
-    },
-  });
+  try {
+    const res = await fetch(fullUrl, {
+      ...init,
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(init?.headers || {}),
+      },
+    });
 
-  if (!res.ok) {
-    const error = await res.text();
-    throw new Error(error || `HTTP ${res.status}`);
+    if (!res.ok) {
+      const error = await res.text();
+      throw new Error(error || `HTTP ${res.status}`);
+    }
+
+    return res.json() as Promise<T>;
+  } catch (error) {
+    if (error instanceof TypeError && error.message === 'Failed to fetch') {
+      console.error(`[API Error] Failed to fetch ${path}`);
+      console.error(`[API Debug] Full URL: ${fullUrl}`);
+      console.error(`[API Debug] Hostname: ${typeof window !== 'undefined' ? window.location.hostname : 'N/A'}`);
+      console.error(`[API Debug] API_BASE_URL: ${API_BASE_URL}`);
+    }
+    throw error;
   }
-
-  return res.json() as Promise<T>;
 }
 
 export const api = {
