@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 30% 5%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 25% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 25% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 195 100% 50%;
+    --primary-foreground: 220 30% 5%;
+
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 20% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 195 100% 45%;
+    --accent-foreground: 220 30% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 195 100% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 30% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 195 100% 50%;
+    --sidebar-primary-foreground: 220 30% 5%;
+    --sidebar-accent: 220 20% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 195 100% 50%;
+
+    /* Custom design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(210 100% 55%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(220 30% 5%) 0%, hsl(220 25% 8%) 100%);
+    --glow: 0 0 40px hsl(195 100% 50% / 0.3);
+    --glow-intense: 0 0 60px hsl(195 100% 50% / 0.5);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Theme colors - light mode defaults */
+    --theme-primary: 195 100% 50%;
+    --theme-secondary: 210 100% 55%;
+  }
+
+  .light {
+    --background: 210 40% 96%;
+    --foreground: 220 30% 5%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 5%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 5%;
+
+    --primary: var(--theme-primary);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 100% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 14% 83%;
+    --muted-foreground: 215 8% 40%;
+
+    --accent: var(--theme-secondary);
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: var(--theme-primary);
+
+    --sidebar-background: 210 40% 96%;
+    --sidebar-foreground: 220 30% 5%;
+    --sidebar-primary: var(--theme-primary);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 14% 83%;
+    --sidebar-accent-foreground: 220 30% 5%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: var(--theme-primary);
+  }
+
+  .dark {
+    --background: 220 30% 5%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 25% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 25% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: var(--theme-primary);
+    --primary-foreground: 220 30% 5%;
+
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 20% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: var(--theme-secondary);
+    --accent-foreground: 220 30% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: var(--theme-primary);
+
+    --sidebar-background: 220 30% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: var(--theme-primary);
+    --sidebar-primary-foreground: 220 30% 5%;
+    --sidebar-accent: 220 20% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: var(--theme-primary);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    font-size: 1.875rem;
+    line-height: 1.3;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+
+  h6 {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  p {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+
+  small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@layer components {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+  }
+
+  .glow-effect {
+    box-shadow: var(--glow);
+  }
+
+  .glow-effect-intense {
+    box-shadow: var(--glow-intense);
+  }
+
+  .smooth-transition {
+    transition: var(--transition-smooth);
+  }
+}
