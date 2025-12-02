@@ -1,9 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import { connectDB } from './config/database';
 import { errorHandler } from './middleware/errorHandler';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 import authRoutes from './routes/auth';
 import projectRoutes from './routes/projects';
@@ -58,6 +62,18 @@ app.use('/api/certifications', certificationRoutes);
 app.use('/api/blogs', blogRoutes);
 
 app.use(errorHandler);
+
+// Serve static files from the frontend dist folder in production
+const frontendDistPath = path.join(__dirname, '../../dist');
+app.use(express.static(frontendDistPath, {
+  maxAge: '1d',
+  etag: false,
+}));
+
+// SPA fallback - serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendDistPath, 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
