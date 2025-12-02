@@ -1,11 +1,10 @@
-# Sachin Takoria – Full-Stack Portfolio (MERN)
+ – Full-Stack Portfolio 
 
 A production-ready personal portfolio application with a full admin panel for managing projects, blogs, resume, experience, certifications, and contact enquiries.
 
 ## 🔗 Live Demo
 
-- 🌐 **Public Site:** https://sachintakoria.in/
-- 🔑 **Admin Panel:** https://sachintakoria.in/admin/login  
+-
   (Credentials are set via your own environment variables – not included here.)
 
 ---
@@ -325,8 +324,4 @@ Integrate analytics (e.g., Plausible, Google Analytics)
 
 Add multi-language support (EN / HI)
 
-🙌 Credits
-Built as a full-stack MERN portfolio and CMS for Sachin Takoria.
-Frontend + Backend both are custom built and deployed at:
 
-https://sachintakoria.in/
