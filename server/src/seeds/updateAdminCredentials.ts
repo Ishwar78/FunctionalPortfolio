@@ -8,7 +8,7 @@ const updateAdminCredentials = async () => {
     await connectDB();
     console.log('Updating admin credentials...');
 
-    const newEmail = 'IshwarAdmin@123456';
+    const newEmail = 'sharmaishwar970@gmail.com';
     const newPassword = 'Ishwar@2002';
 
     const passwordHash = await hashPassword(newPassword);
