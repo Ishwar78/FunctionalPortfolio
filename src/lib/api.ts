@@ -47,3 +47,13 @@ export const api = {
   delete: <T>(path: string) =>
     fetchJSON<T>(path, { method: "DELETE" }),
 };
+
+// Health check function to verify API is accessible
+export const checkApiHealth = async (): Promise<boolean> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/health`);
+    return response.ok;
+  } catch {
+    return false;
+  }
+};
