@@ -56,6 +56,11 @@ connectDB().catch(() => {
   process.exit(1);
 });
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 app.use('/api/admin/auth', authRoutes);
 app.use('/api/admin/projects', projectRoutes);
 app.use('/api/admin/content', contentRoutes);
