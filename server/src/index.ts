@@ -1,9 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import { connectDB } from './config/database';
 import { errorHandler } from './middleware/errorHandler';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 import authRoutes from './routes/auth';
 import projectRoutes from './routes/projects';
