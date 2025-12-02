@@ -40,9 +40,9 @@ const Logo = ({ className = '', textColor = 'text-white' }: LogoProps) => {
             className="absolute inset-0 rounded-lg"
           />
 
-          {/* S letter */}
+          {/* I letter */}
           <span className="relative text-white font-bold text-lg leading-none">
-            S
+            I
           </span>
         </div>
       </motion.div>
@@ -53,7 +53,7 @@ const Logo = ({ className = '', textColor = 'text-white' }: LogoProps) => {
           whileHover={{ x: 3 }}
           className={`font-display font-bold text-lg ${textColor} transition-colors`}
         >
-          Sachin
+          Ishwar
         </motion.span>
         <motion.span
           whileHover={{ x: 3 }}
