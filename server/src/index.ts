@@ -25,17 +25,29 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:8080',
+  'http://localhost:3000',
 ];
 
+// Add environment-specific origins
 if (process.env.CORS_ORIGIN) {
   allowedOrigins.push(process.env.CORS_ORIGIN);
 }
 
+// In production, allow requests from the same origin (fly.dev or other deployment domains)
+if (process.env.NODE_ENV === 'production') {
+  // Allow any HTTPS domain in production (single server setup)
+  app.use(cors({
+    credentials: true,
+  }));
+} else {
+  // Development: use whitelist
+  app.use(cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }));
+}
+
 app.use(morgan('dev'));
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
 app.use(express.json());
 // ---- CORS CONFIG YAHAN TAK ----
 
