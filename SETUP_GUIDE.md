@@ -10,7 +10,7 @@
 2. Create account → Create organization → Create project
 3. Build a cluster (free M0 tier)
 4. Create database user:
-   - Username: `sachintakoria2204_db_user`
+   - Username: `ishwarsharma_db_user`
    - Password: Generate strong password
 5. Get connection string (copy the URI)
 6. Network Access: Add your IP address
@@ -35,10 +35,10 @@ npm install
 
 ### Backend (server/.env)
 ```env
-MONGODB_URI=mongodb+srv://sachintakoria2204_db_user:PASSWORD@cluster0.sshoxfp.mongodb.net/portfolio
-JWT_SECRET=Sachin@123
-ADMIN_DEFAULT_EMAIL=sachintakoria2204@gmail.com
-ADMIN_DEFAULT_PASSWORD=Sachin@123
+MONGODB_URI=mongodb+srv://ishwarsharma_db_user:PASSWORD@cluster0.sshoxfp.mongodb.net/portfolio
+JWT_SECRET=Ishwar@123
+ADMIN_DEFAULT_EMAIL=ishwarsharma@example.com
+ADMIN_DEFAULT_PASSWORD=Ishwar@123
 WHATSAPP_TO_NUMBER=7015242844
 PORT=5000
 NODE_ENV=development
@@ -82,8 +82,8 @@ npm run dev
 
 1. Go to http://localhost:5173/admin/login
 2. Login with:
-   - Email: `sachintakoria2204@gmail.com`
-   - Password: `Sachin@123`
+   - Email: `ishwarsharma@example.com`
+   - Password: `Ishwar@123`
 3. Change password immediately!
 
 ## 8. Optional: Setup WhatsApp Notifications

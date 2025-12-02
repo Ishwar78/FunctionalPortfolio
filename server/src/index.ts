@@ -25,23 +25,48 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:8080',
+  'http://localhost:3000',
+  'http://127.0.0.1:5173',
+  'http://127.0.0.1:8080',
+  'http://127.0.0.1:3000',
 ];
 
+// Add environment-specific origins
 if (process.env.CORS_ORIGIN) {
   allowedOrigins.push(process.env.CORS_ORIGIN);
 }
 
-app.use(morgan('dev'));
+// Configure CORS - be permissive since this is a single-server setup serving both frontend and API
 app.use(cors({
-  origin: allowedOrigins,
+  origin: process.env.NODE_ENV === 'production'
+    ? true  // Allow all origins in production (single server setup)
+    : (origin, callback) => {
+      // In development, check against whitelist
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        // Log but still allow in development for debugging
+        console.warn(`CORS: Allowing request from ${origin}`);
+        callback(null, true);
+      }
+    },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+app.use(morgan('dev'));
 app.use(express.json());
 // ---- CORS CONFIG YAHAN TAK ----
 
 connectDB().catch(() => {
   console.error('Failed to connect to database');
   process.exit(1);
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
 app.use('/api/admin/auth', authRoutes);

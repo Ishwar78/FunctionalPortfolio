@@ -3,7 +3,7 @@
 ## Pre-Deployment Checklist
 
 ### Security
-- [ ] Change default admin password from `Sachin@123` to a strong password
+- [ ] Change default admin password from `Ishwar@123` to a strong password
 - [ ] Generate new JWT_SECRET (use: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
 - [ ] Ensure NODE_ENV=production
 - [ ] Enable HTTPS (all hosting providers offer this)

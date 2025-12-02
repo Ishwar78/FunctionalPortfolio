@@ -105,9 +105,9 @@ const Resume = () => {
 
   const defaultResume: Resume = {
     _id: 'default',
-    fullName: 'Sachin Takoria',
+    fullName: 'Ishwar Sharma',
     title: 'MERN Stack Web Developer',
-    email: 'sachintakoria2204@gmail.com',
+    email: 'ishwar@example.com',
     phone: '+91-7015242844',
     location: 'Rohtak, Haryana, India',
     profileImage: '',

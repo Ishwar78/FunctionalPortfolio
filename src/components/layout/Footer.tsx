@@ -57,7 +57,7 @@ const Footer = () => {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
-                href="mailto:sachintakoria2204@gmail.com"
+                href="mailto:ishwar@example.com"
                 className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
               >
                 <Mail className="h-5 w-5" />
@@ -68,7 +68,7 @@ const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-border/40 text-center">
           <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
-            Built with <Heart className="h-4 w-4 text-red-500 fill-red-500" /> by Sachin Takoria
+            Built with <Heart className="h-4 w-4 text-red-500 fill-red-500" /> by Ishwar Sharma
           </p>
         </div>
       </div>
