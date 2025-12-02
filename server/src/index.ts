@@ -26,6 +26,9 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:8080',
   'http://localhost:3000',
+  'http://127.0.0.1:5173',
+  'http://127.0.0.1:8080',
+  'http://127.0.0.1:3000',
 ];
 
 // Add environment-specific origins
@@ -33,19 +36,24 @@ if (process.env.CORS_ORIGIN) {
   allowedOrigins.push(process.env.CORS_ORIGIN);
 }
 
-// In production, allow requests from the same origin (fly.dev or other deployment domains)
-if (process.env.NODE_ENV === 'production') {
-  // Allow any HTTPS domain in production (single server setup)
-  app.use(cors({
-    credentials: true,
-  }));
-} else {
-  // Development: use whitelist
-  app.use(cors({
-    origin: allowedOrigins,
-    credentials: true,
-  }));
-}
+// Configure CORS - be permissive since this is a single-server setup serving both frontend and API
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production'
+    ? true  // Allow all origins in production (single server setup)
+    : (origin, callback) => {
+      // In development, check against whitelist
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        // Log but still allow in development for debugging
+        console.warn(`CORS: Allowing request from ${origin}`);
+        callback(null, true);
+      }
+    },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 app.use(morgan('dev'));
 app.use(express.json());
