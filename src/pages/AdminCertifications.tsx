@@ -32,7 +32,7 @@ import { api } from '@/lib/api';
 import AdminLayout from '@/components/layout/AdminLayout';
 import { useToast } from '@/hooks/use-toast';
 import { Edit2, Trash2, Plus } from 'lucide-react';
-import { ImageInput } from '@/components/AdminImageUpload';
+import { FileUpload } from '@/components/FileUpload';
 
 interface Certification {
   _id: string;
