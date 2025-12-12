@@ -231,16 +231,22 @@ const loadAllContent = async () => {
                       placeholder="Write a brief summary about yourself..."
                     />
                   </div>
-                  <ImageInput
-                    label="Background Image URL"
+                  <FileUpload
+                    label="Background Image"
                     value={content.about?.background_image || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        about: { ...prev.about, background_image: value } as any,
+                        about: { ...prev.about, background_image: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        about: { ...prev.about, background_image: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
                   <div>
