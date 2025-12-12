@@ -17,6 +17,7 @@ import resumeRoutes from './routes/resumes';
 import experienceRoutes from './routes/experience';
 import certificationRoutes from './routes/certifications';
 import blogRoutes from './routes/blogs';
+import fileRoutes from './routes/files';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
