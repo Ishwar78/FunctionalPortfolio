@@ -297,14 +297,18 @@ const AdminExperience = () => {
                     Currently working here
                   </label>
                 </div>
-                <ImageInput
+                <FileUpload
                   label="Company Logo"
                   value={formData.companyLogo}
-                  onChange={(value) =>
-                    setFormData({ ...formData, companyLogo: value })
+                  onChange={(fileId, url) =>
+                    setFormData({ ...formData, companyLogo: url })
                   }
-                  placeholder="Company logo URL..."
+                  onDelete={() =>
+                    setFormData({ ...formData, companyLogo: '' })
+                  }
+                  accept="image/*"
                   preview
+                  helpText="Upload your company logo"
                 />
                 <div>
                   <label className="text-sm font-medium mb-2 block">Description Points</label>
