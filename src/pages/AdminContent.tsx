@@ -388,16 +388,22 @@ const loadAllContent = async () => {
                       </Button>
                     </div>
                   ))}
-                  <ImageInput
-                    label="Background Image URL"
+                  <FileUpload
+                    label="Background Image"
                     value={content.skills?.background_image || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        skills: { ...prev.skills, background_image: value } as any,
+                        skills: { ...prev.skills, background_image: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        skills: { ...prev.skills, background_image: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
                   <Button
