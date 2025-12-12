@@ -554,22 +554,28 @@ const loadAllContent = async () => {
                     >
                       <Card className="p-4 border border-muted-foreground/20">
                         <div className="space-y-3">
-                          <div>
-                            <label className="text-sm font-medium">Image URL</label>
-                            <Input
-                              type="url"
-                              value={banner.image_url || ''}
-                              onChange={(e) => {
-                                const newBanners = [...(content.banners?.items || [])];
-                                newBanners[idx] = { ...banner, image_url: e.target.value };
-                                setContent((prev) => ({
-                                  ...prev,
-                                  banners: { ...prev.banners, items: newBanners } as any,
-                                }));
-                              }}
-                              placeholder="https://images.unsplash.com/..."
-                            />
-                          </div>
+                          <FileUpload
+                            label="Banner Image"
+                            value={banner.image_url || ''}
+                            onChange={(fileId, url) => {
+                              const newBanners = [...(content.banners?.items || [])];
+                              newBanners[idx] = { ...banner, image_url: url };
+                              setContent((prev) => ({
+                                ...prev,
+                                banners: { ...prev.banners, items: newBanners } as any,
+                              }));
+                            }}
+                            onDelete={() => {
+                              const newBanners = [...(content.banners?.items || [])];
+                              newBanners[idx] = { ...banner, image_url: '' };
+                              setContent((prev) => ({
+                                ...prev,
+                                banners: { ...prev.banners, items: newBanners } as any,
+                              }));
+                            }}
+                            accept="image/*"
+                            preview
+                          />
                           <div>
                             <label className="text-sm font-medium">Alt Text</label>
                             <Input
