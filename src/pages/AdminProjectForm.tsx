@@ -9,6 +9,7 @@ import { api } from '@/lib/api';
 import AdminLayout from '@/components/layout/AdminLayout';
 import { useToast } from '@/hooks/use-toast';
 import { X } from 'lucide-react';
+import { FileUpload } from '@/components/FileUpload';
 
 interface ProjectFormData {
   title: string;
@@ -257,16 +258,19 @@ const handleChange = (
               <CardTitle>Images & Links</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div>
-                <label className="text-sm font-medium">Cover Image URL</label>
-                <Input
-                  name="cover_image_url"
-                  type="url"
-                  value={formData.cover_image_url}
-                  onChange={handleChange}
-                  placeholder="https://..."
-                />
-              </div>
+              <FileUpload
+                label="Cover Image"
+                value={formData.cover_image_url}
+                onChange={(fileId, url) =>
+                  setFormData((prev) => ({ ...prev, cover_image_url: url }))
+                }
+                onDelete={() =>
+                  setFormData((prev) => ({ ...prev, cover_image_url: '' }))
+                }
+                accept="image/*"
+                preview
+                helpText="Upload a cover image for your project"
+              />
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium">GitHub URL</label>

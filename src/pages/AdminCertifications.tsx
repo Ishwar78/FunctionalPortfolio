@@ -32,7 +32,7 @@ import { api } from '@/lib/api';
 import AdminLayout from '@/components/layout/AdminLayout';
 import { useToast } from '@/hooks/use-toast';
 import { Edit2, Trash2, Plus } from 'lucide-react';
-import { ImageInput } from '@/components/AdminImageUpload';
+import { FileUpload } from '@/components/FileUpload';
 
 interface Certification {
   _id: string;
@@ -280,14 +280,18 @@ const AdminCertifications = () => {
                     placeholder="https://..."
                   />
                 </div>
-                <ImageInput
+                <FileUpload
                   label="Certificate Image"
                   value={formData.certificateImage}
-                  onChange={(value) =>
-                    setFormData({ ...formData, certificateImage: value })
+                  onChange={(fileId, url) =>
+                    setFormData({ ...formData, certificateImage: url })
                   }
-                  placeholder="Certificate image URL..."
+                  onDelete={() =>
+                    setFormData({ ...formData, certificateImage: '' })
+                  }
+                  accept="image/*"
                   preview
+                  helpText="Upload your certificate image"
                 />
                 <div>
                   <label className="text-sm font-medium">Description</label>

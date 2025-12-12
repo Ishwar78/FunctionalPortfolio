@@ -9,7 +9,7 @@ import AdminLayout from '@/components/layout/AdminLayout';
 import { useToast } from '@/hooks/use-toast';
 import { X, Plus, ImagePlus } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ImageInput } from '@/components/AdminImageUpload';
+import { FileUpload } from '@/components/FileUpload';
 
 interface ContentData {
   hero?: { title: string; subtitle: string; ctas: any[]; background_image?: string; image_url?: string };
@@ -156,28 +156,41 @@ const loadAllContent = async () => {
                       placeholder="e.g., MERN Stack Web Developer"
                     />
                   </div>
-                  <ImageInput
+                  <FileUpload
                     label="Hero Profile Image"
                     value={content.hero?.image_url || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        hero: { ...prev.hero, image_url: value } as any,
+                        hero: { ...prev.hero, image_url: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/... (Your professional photo)"
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        hero: { ...prev.hero, image_url: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
+                    helpText="Upload your professional photo"
                   />
-                  <ImageInput
-                    label="Background Image URL"
+                  <FileUpload
+                    label="Background Image"
                     value={content.hero?.background_image || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        hero: { ...prev.hero, background_image: value } as any,
+                        hero: { ...prev.hero, background_image: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        hero: { ...prev.hero, background_image: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
                   <Button
@@ -218,16 +231,22 @@ const loadAllContent = async () => {
                       placeholder="Write a brief summary about yourself..."
                     />
                   </div>
-                  <ImageInput
-                    label="Background Image URL"
+                  <FileUpload
+                    label="Background Image"
                     value={content.about?.background_image || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        about: { ...prev.about, background_image: value } as any,
+                        about: { ...prev.about, background_image: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        about: { ...prev.about, background_image: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
                   <div>
@@ -369,16 +388,22 @@ const loadAllContent = async () => {
                       </Button>
                     </div>
                   ))}
-                  <ImageInput
-                    label="Background Image URL"
+                  <FileUpload
+                    label="Background Image"
                     value={content.skills?.background_image || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        skills: { ...prev.skills, background_image: value } as any,
+                        skills: { ...prev.skills, background_image: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        skills: { ...prev.skills, background_image: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
                   <Button
@@ -529,22 +554,28 @@ const loadAllContent = async () => {
                     >
                       <Card className="p-4 border border-muted-foreground/20">
                         <div className="space-y-3">
-                          <div>
-                            <label className="text-sm font-medium">Image URL</label>
-                            <Input
-                              type="url"
-                              value={banner.image_url || ''}
-                              onChange={(e) => {
-                                const newBanners = [...(content.banners?.items || [])];
-                                newBanners[idx] = { ...banner, image_url: e.target.value };
-                                setContent((prev) => ({
-                                  ...prev,
-                                  banners: { ...prev.banners, items: newBanners } as any,
-                                }));
-                              }}
-                              placeholder="https://images.unsplash.com/..."
-                            />
-                          </div>
+                          <FileUpload
+                            label="Banner Image"
+                            value={banner.image_url || ''}
+                            onChange={(fileId, url) => {
+                              const newBanners = [...(content.banners?.items || [])];
+                              newBanners[idx] = { ...banner, image_url: url };
+                              setContent((prev) => ({
+                                ...prev,
+                                banners: { ...prev.banners, items: newBanners } as any,
+                              }));
+                            }}
+                            onDelete={() => {
+                              const newBanners = [...(content.banners?.items || [])];
+                              newBanners[idx] = { ...banner, image_url: '' };
+                              setContent((prev) => ({
+                                ...prev,
+                                banners: { ...prev.banners, items: newBanners } as any,
+                              }));
+                            }}
+                            accept="image/*"
+                            preview
+                          />
                           <div>
                             <label className="text-sm font-medium">Alt Text</label>
                             <Input
@@ -664,55 +695,79 @@ const loadAllContent = async () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <ImageInput
+                  <FileUpload
                     label="Hero Section Background"
                     value={content.backgrounds?.hero || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        backgrounds: { ...prev.backgrounds, hero: value } as any,
+                        backgrounds: { ...prev.backgrounds, hero: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        backgrounds: { ...prev.backgrounds, hero: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
 
-                  <ImageInput
+                  <FileUpload
                     label="About Section Background"
                     value={content.backgrounds?.about || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        backgrounds: { ...prev.backgrounds, about: value } as any,
+                        backgrounds: { ...prev.backgrounds, about: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        backgrounds: { ...prev.backgrounds, about: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
 
-                  <ImageInput
+                  <FileUpload
                     label="Skills Section Background"
                     value={content.backgrounds?.skills || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        backgrounds: { ...prev.backgrounds, skills: value } as any,
+                        backgrounds: { ...prev.backgrounds, skills: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        backgrounds: { ...prev.backgrounds, skills: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
 
-                  <ImageInput
+                  <FileUpload
                     label="Projects Section Background"
                     value={content.backgrounds?.projects || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        backgrounds: { ...prev.backgrounds, projects: value } as any,
+                        backgrounds: { ...prev.backgrounds, projects: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        backgrounds: { ...prev.backgrounds, projects: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
 

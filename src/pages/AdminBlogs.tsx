@@ -33,7 +33,7 @@ import { api } from '@/lib/api';
 import AdminLayout from '@/components/layout/AdminLayout';
 import { useToast } from '@/hooks/use-toast';
 import { Edit2, Trash2, Plus, X } from 'lucide-react';
-import { ImageInput } from '@/components/AdminImageUpload';
+import { FileUpload } from '@/components/FileUpload';
 import { motion } from 'framer-motion';
 
 interface Blog {
@@ -296,14 +296,18 @@ const AdminBlogs = () => {
                     rows={2}
                   />
                 </div>
-                <ImageInput
+                <FileUpload
                   label="Featured Image"
                   value={formData.featuredImage}
-                  onChange={(value) =>
-                    setFormData({ ...formData, featuredImage: value })
+                  onChange={(fileId, url) =>
+                    setFormData({ ...formData, featuredImage: url })
                   }
-                  placeholder="Featured image URL..."
+                  onDelete={() =>
+                    setFormData({ ...formData, featuredImage: '' })
+                  }
+                  accept="image/*"
                   preview
+                  helpText="Upload a featured image for your blog post"
                 />
                 <div>
                   <label className="text-sm font-medium">Content *</label>

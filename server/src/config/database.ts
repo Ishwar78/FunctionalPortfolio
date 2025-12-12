@@ -1,10 +1,16 @@
 import mongoose from 'mongoose';
+import { initializeGridFS } from '../utils/gridfs';
 
 export const connectDB = async () => {
   try {
     const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio';
     await mongoose.connect(uri);
     console.log('MongoDB connected successfully');
+
+    // Initialize GridFS for file uploads
+    const db = mongoose.connection;
+    initializeGridFS(db);
+    console.log('GridFS initialized successfully');
   } catch (error) {
     console.error('MongoDB connection error:', error);
     process.exit(1);
