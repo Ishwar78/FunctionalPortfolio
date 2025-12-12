@@ -70,6 +70,9 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// File routes
+app.use('/api/files', fileRoutes);
+
 app.use('/api/admin/auth', authRoutes);
 app.use('/api/admin/projects', projectRoutes);
 app.use('/api/admin/content', contentRoutes);
