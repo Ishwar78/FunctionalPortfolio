@@ -695,55 +695,79 @@ const loadAllContent = async () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <ImageInput
+                  <FileUpload
                     label="Hero Section Background"
                     value={content.backgrounds?.hero || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        backgrounds: { ...prev.backgrounds, hero: value } as any,
+                        backgrounds: { ...prev.backgrounds, hero: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        backgrounds: { ...prev.backgrounds, hero: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
 
-                  <ImageInput
+                  <FileUpload
                     label="About Section Background"
                     value={content.backgrounds?.about || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        backgrounds: { ...prev.backgrounds, about: value } as any,
+                        backgrounds: { ...prev.backgrounds, about: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        backgrounds: { ...prev.backgrounds, about: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
 
-                  <ImageInput
+                  <FileUpload
                     label="Skills Section Background"
                     value={content.backgrounds?.skills || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        backgrounds: { ...prev.backgrounds, skills: value } as any,
+                        backgrounds: { ...prev.backgrounds, skills: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        backgrounds: { ...prev.backgrounds, skills: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
 
-                  <ImageInput
+                  <FileUpload
                     label="Projects Section Background"
                     value={content.backgrounds?.projects || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        backgrounds: { ...prev.backgrounds, projects: value } as any,
+                        backgrounds: { ...prev.backgrounds, projects: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        backgrounds: { ...prev.backgrounds, projects: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
 
