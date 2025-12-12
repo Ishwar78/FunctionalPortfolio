@@ -9,6 +9,7 @@ import { api } from '@/lib/api';
 import AdminLayout from '@/components/layout/AdminLayout';
 import { useToast } from '@/hooks/use-toast';
 import { X } from 'lucide-react';
+import { FileUpload } from '@/components/FileUpload';
 
 interface ProjectFormData {
   title: string;
