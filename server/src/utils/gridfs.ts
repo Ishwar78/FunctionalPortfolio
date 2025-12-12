@@ -5,7 +5,8 @@ import { Readable } from 'stream';
 let gridFSBucket: GridFSBucket | null = null;
 
 export const initializeGridFS = (db: mongoose.Connection) => {
-  gridFSBucket = new GridFSBucket(db.getClient().db(db.getName()));
+  const mongoDb = db.getClient().db('Portfolio');
+  gridFSBucket = new GridFSBucket(mongoDb);
 };
 
 export const uploadFile = async (
