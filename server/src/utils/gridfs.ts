@@ -5,7 +5,11 @@ import { Readable } from 'stream';
 let gridFSBucket: GridFSBucket | null = null;
 
 export const initializeGridFS = (db: mongoose.Connection) => {
-  const mongoDb = db.getClient().db('Portfolio');
+  // Get the native MongoDB database instance
+  const mongoDb = db.db;
+  if (!mongoDb) {
+    throw new Error('Failed to get MongoDB database instance');
+  }
   gridFSBucket = new GridFSBucket(mongoDb);
 };
 
