@@ -9,7 +9,7 @@ import AdminLayout from '@/components/layout/AdminLayout';
 import { useToast } from '@/hooks/use-toast';
 import { X, Plus, ImagePlus } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ImageInput } from '@/components/AdminImageUpload';
+import { FileUpload } from '@/components/FileUpload';
 
 interface ContentData {
   hero?: { title: string; subtitle: string; ctas: any[]; background_image?: string; image_url?: string };
