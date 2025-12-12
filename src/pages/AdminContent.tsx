@@ -156,28 +156,41 @@ const loadAllContent = async () => {
                       placeholder="e.g., MERN Stack Web Developer"
                     />
                   </div>
-                  <ImageInput
+                  <FileUpload
                     label="Hero Profile Image"
                     value={content.hero?.image_url || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        hero: { ...prev.hero, image_url: value } as any,
+                        hero: { ...prev.hero, image_url: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/... (Your professional photo)"
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        hero: { ...prev.hero, image_url: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
+                    helpText="Upload your professional photo"
                   />
-                  <ImageInput
-                    label="Background Image URL"
+                  <FileUpload
+                    label="Background Image"
                     value={content.hero?.background_image || ''}
-                    onChange={(value) =>
+                    onChange={(fileId, url) =>
                       setContent((prev) => ({
                         ...prev,
-                        hero: { ...prev.hero, background_image: value } as any,
+                        hero: { ...prev.hero, background_image: url } as any,
                       }))
                     }
-                    placeholder="https://images.unsplash.com/..."
+                    onDelete={() =>
+                      setContent((prev) => ({
+                        ...prev,
+                        hero: { ...prev.hero, background_image: '' } as any,
+                      }))
+                    }
+                    accept="image/*"
                     preview
                   />
                   <Button
