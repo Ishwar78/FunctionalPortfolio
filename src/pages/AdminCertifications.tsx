@@ -280,14 +280,18 @@ const AdminCertifications = () => {
                     placeholder="https://..."
                   />
                 </div>
-                <ImageInput
+                <FileUpload
                   label="Certificate Image"
                   value={formData.certificateImage}
-                  onChange={(value) =>
-                    setFormData({ ...formData, certificateImage: value })
+                  onChange={(fileId, url) =>
+                    setFormData({ ...formData, certificateImage: url })
                   }
-                  placeholder="Certificate image URL..."
+                  onDelete={() =>
+                    setFormData({ ...formData, certificateImage: '' })
+                  }
+                  accept="image/*"
                   preview
+                  helpText="Upload your certificate image"
                 />
                 <div>
                   <label className="text-sm font-medium">Description</label>
