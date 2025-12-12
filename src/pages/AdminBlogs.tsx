@@ -296,14 +296,18 @@ const AdminBlogs = () => {
                     rows={2}
                   />
                 </div>
-                <ImageInput
+                <FileUpload
                   label="Featured Image"
                   value={formData.featuredImage}
-                  onChange={(value) =>
-                    setFormData({ ...formData, featuredImage: value })
+                  onChange={(fileId, url) =>
+                    setFormData({ ...formData, featuredImage: url })
                   }
-                  placeholder="Featured image URL..."
+                  onDelete={() =>
+                    setFormData({ ...formData, featuredImage: '' })
+                  }
+                  accept="image/*"
                   preview
+                  helpText="Upload a featured image for your blog post"
                 />
                 <div>
                   <label className="text-sm font-medium">Content *</label>
